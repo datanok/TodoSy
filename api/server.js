@@ -23,6 +23,22 @@ app.get("/todos", async (req, res) => {
   res.json(todos);
 });
 
+app.put("/todo/edit/:id", async (req, res) => {
+  try {
+    const todo = await Todo.findByIdAndUpdate(
+      req.params.id,
+      { text: req.body.text },
+      {
+        new: true,
+      }
+    );
+    res.json(todo);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 app.post("/todo/new", (req, res) => {
   const todo = new Todo({
     text: req.body.text,

@@ -13,4 +13,9 @@ Content-Type: application/json
 DELETE  http://localhost:3001/todo/delete/6446c1668b7afd4569ed56b8
 
 ###
-PUT http://localhost:3001/todo/complete/6446c1428b7afd4569ed56b5
+PUT http://localhost:3001/todo/edit/6446c1428b7afd4569ed56b5
+Content-Type: application/json
+
+{
+    "text": "updated again"
+}
