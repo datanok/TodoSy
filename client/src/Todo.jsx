@@ -30,6 +30,7 @@ export default function Todo({ todo, completeTodo, deleteTodo, editTodo }) {
             className={`w-full text-green focus:outline-none  active:border-0`}
             onChange={handleChange}
             value={editedText}
+            required
           />
 
           <button

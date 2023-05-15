@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import Todo from "./Todo";
+import CreateTodoPopup from "./CreateTodoPopup";
+import Tabs from './Tabs'
 
 const API_BASE = "http://localhost:3001";
 
 function App() {
   const [todos, setTodos] = useState([]);
-
+  const [open, setOpen] = useState(false)
   const [newTodo, SetNewTodo] = useState("");
 
   useEffect(() => {
@@ -70,6 +72,10 @@ function App() {
     toast.success("Task Updated!");
   };
 
+  const handleClose =() => {
+    setOpen(false);
+  }
+
   const GetTodos = () => {
     fetch(API_BASE + "/todos")
       .then((res) => res.json()) // return the parsed JSON response
@@ -86,8 +92,11 @@ function App() {
         <Toaster />
       </div>
       <h1 className="text-center text-2xl font-bold text-white">Todo List</h1>
-
-      <div className="h-100 w-full flex items-center justify-center bg-teal-lightest font-sans">
+      {open? <CreateTodoPopup handleClose={handleClose}/>:<></>}
+  
+<div className="w-[40%] mx-auto">
+<Tabs/></div>
+      {/* <div className="h-100 w-full flex items-center justify-center bg-teal-lightest font-sans">
         <div className="bg-white rounded shadow p-6 m-4 w-full lg:w-3/4 lg:max-w-lg">
           <div className="mb-4">
             <h1 className="text-black font-bold">Your Tasks</h1>
@@ -118,7 +127,7 @@ function App() {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

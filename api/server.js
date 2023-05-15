@@ -17,11 +17,33 @@ mongoose
   .catch(console.error);
 
 const Todo = require("./models/Todo");
-
+Todo.find({})
+  .then(todos => {
+    console.log(todos);
+  })
+  .catch(err => {
+    console.error(err);
+  });
 app.get("/todos", async (req, res) => {
   const todos = await Todo.find();
   res.json(todos);
 });
+const today = new Date();
+
+app.get("/todays-todos", async (req, res) => {
+  const today = new Date(); // Get today's date
+  today.setHours(0, 0, 0, 0); // Set the time to midnight
+  const todos = await Todo.find({
+    dueDate: {
+      $gte: today,
+      $lt: new Date(today.getTime() + 24 * 60 * 60 * 1000) // Add one day to today's date
+    }
+  }); // Find todos where dueDate is between today and tomorrow
+  console.log('todays')
+  console.log(todos)
+  res.json(todos);
+});
+
 
 app.put("/todo/edit/:id", async (req, res) => {
   try {
