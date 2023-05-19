@@ -11,8 +11,8 @@ const Tabs = () => {
     const [todos, setTodos] = useState([]);
     const [todayTodos,setTodayTodo] = useState([]);
     const [open, setOpen] = useState(false)
-  const [newTodo, SetNewTodo] = useState("");
-  const [showPopup,setshowPopup ]= useState(false)
+    const [newTodo, SetNewTodo] = useState("");
+    const [showPopup,setshowPopup ]= useState(false)
 
   useEffect(() => {
     GetTodos();
@@ -25,22 +25,6 @@ const Tabs = () => {
       method: "DELETE",
     }).then((res) => res.json());
     setTodos((todos) => todos.filter((todo) => todo._id !== data._id));
-  };
-  const addTodo = async () => {
-    if(newTodo.length ===0){
-      toast.error("Task cannot be empty");
-      return
-    }
-    const data = await fetch(API_BASE + "/todo/new", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({ text: newTodo }),
-    }).then((res) => res.json());
-    setTodos([...todos, data]);
-    toast.success("Task Added!");
-    SetNewTodo("");
   };
 
   const completeTodo = async (id) => {
@@ -76,6 +60,7 @@ const Tabs = () => {
         return todo;
       })
     );
+
     toast.success("Task Updated!");
   };
 
@@ -106,7 +91,7 @@ const Tabs = () => {
   const [openTab, setOpenTab] = React.useState(1);
   return (
     <>
-    {open?(<CreateTodoPopup handleClose={handleClose}/>):(<></>)}
+    {open?(<CreateTodoPopup handleClose={handleClose} setTodos={setTodos} todos={todos} setOpen={setOpen}/>):(<></>)}
       <div className="flex flex-wrap">
         <div className="w-full bg-white rounded shadow">
           <ul
@@ -160,19 +145,16 @@ const Tabs = () => {
                 <div className="h-100 w-full flex items-center justify-center bg-teal-lightest font-sans">
         <div className="bg-white w-full lg:w-3/4 lg:max-w-lg">
           <div className="mb-4">
-            <h1 className="text-black font-bold">Your Tasks</h1>
-            <div className="flex mt-4">
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker"
-                placeholder="Add Todo"
-                onChange={(e) => SetNewTodo(e.target.value)}
-                value={newTodo}
-              />
-              <button
-                className="flex-no-shrink hover:text-teal-600"
+    
+            <div className="flex mt-2">
+           
+            
+            <button
+                
                 onClick={setOpen}
+                class="w-full text-white bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
               >
-                <BsFillPlusCircleFill />
+                Add Task
               </button>
             </div>
           </div>
@@ -195,19 +177,15 @@ const Tabs = () => {
                 <div className="h-100 w-full flex items-center justify-center bg-teal-lightest font-sans">
         <div className="bg-white w-full lg:w-3/4 lg:max-w-lg">
           <div className="mb-4">
-            <h1 className="text-black font-bold">Your Tasks</h1>
-            <div className="flex mt-4">
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker"
-                placeholder="Add Todo"
-                onChange={(e) => SetNewTodo(e.target.value)}
-                value={newTodo}
-              />
-              <button
-                className="flex-no-shrink hover:text-teal-600"
-                onClick={addTodo}
+     
+            <div className="flex mt-2">
+           
+            <button
+                
+                onClick={setOpen}
+                class="w-full text-white bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
               >
-                <BsFillPlusCircleFill />
+                Add Task
               </button>
             </div>
           </div>

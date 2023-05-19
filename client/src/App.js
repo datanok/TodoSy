@@ -4,6 +4,9 @@ import { BsFillPlusCircleFill } from "react-icons/bs";
 import Todo from "./Todo";
 import CreateTodoPopup from "./CreateTodoPopup";
 import Tabs from './Tabs'
+import Home from "./Home";
+import Navbar from './Navbar'
+import { Route, Routes } from "react-router-dom";
 
 const API_BASE = "http://localhost:3001";
 
@@ -88,14 +91,16 @@ function App() {
 
   return (
     <div className="App">
-      <div>
+      <Navbar/>
+      {/* <div>
         <Toaster />
       </div>
+    
       <h1 className="text-center text-2xl font-bold text-white">Todo List</h1>
       {open? <CreateTodoPopup handleClose={handleClose}/>:<></>}
   
-<div className="w-[40%] mx-auto">
-<Tabs/></div>
+<div className=" w-[100%] lg:w-[40%] lg:mx-auto">
+<Tabs/></div> */}
       {/* <div className="h-100 w-full flex items-center justify-center bg-teal-lightest font-sans">
         <div className="bg-white rounded shadow p-6 m-4 w-full lg:w-3/4 lg:max-w-lg">
           <div className="mb-4">
@@ -128,6 +133,9 @@ function App() {
           </div>
         </div>
       </div> */}
+        <Routes>
+        <Route path='/home' element={<Home/>}/>
+      </Routes>
     </div>
   );
 }

@@ -60,14 +60,23 @@ app.put("/todo/edit/:id", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+app.post("/todo/new", async (req, res) => {
+  const { text, duedate } = req.body; // Assuming the request body contains both "text" and "duedate" fields
 
-app.post("/todo/new", (req, res) => {
   const todo = new Todo({
-    text: req.body.text,
+    text: text,
+    duedate: duedate,
   });
-  todo.save();
-  res.json(todo);
+
+  try {
+    const savedTodo = await todo.save();
+    res.json(savedTodo);
+  } catch (error) {
+    console.error("Error saving todo:", error);
+    res.status(500).json({ error: "Failed to save todo" });
+  }
 });
+
 
 app.delete("/todo/delete/:id", async (req, res) => {
   const result = await Todo.findByIdAndDelete(req.params.id);
