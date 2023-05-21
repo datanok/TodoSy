@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Transition } from "@headlessui/react";
+import { ReactComponent as Logo } from "./notepad.svg";
 
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,25 +10,27 @@ function Nav() {
         <div className="max-w-7xl mx-auto sm:px-6">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <img
-                  className="h-8 w-8"
-                  src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                  alt="Workflow"
-                />
+              <div className="flex-shrink-0 flex flex-row">
+                {/* <Logo
+                  fill="#ff7179"
+                  style={{ width: "30px", height: "30px" }}
+                /> */}
+                <span className="text-xl font-bold bg-gradient-to-r from-pink-primary to-pink-600 bg-clip-text text-transparent">
+                  TodoSy
+                </span>
               </div>
               <div className="hidden md:block">
-                <div className="ml-10 flex items-baseline space-x-4">
+                <div className="ml-10 flex items-baseline">
                   <a
-                    href="#"
-                    className="text-white p-5 text-sm font-medium hover:border-b-4 border-pink-primary hover:bg-purple-primary"
+                    href="/home"
+                    className="text-white p-5 px-7 text-sm font-medium hover:border-t-4 border-pink-primary hover:bg-purple-primary"
                   >
                     Dashboards
                   </a>
 
                   <a
                     href="#"
-                    className="text-white p-5 text-sm font-medium hover:border-t-4 border-pink-primary hover:bg-purple-primary"
+                    className="text-white p-5 border-t-4 bg-purple-primary text-sm font-medium hover:border-t-4 border-pink-primary hover:bg-purple-primary"
                   >
                     Team
                   </a>
@@ -153,9 +156,6 @@ function Nav() {
           )}
         </Transition>
       </nav>
-
-   
-   
     </div>
   );
 }

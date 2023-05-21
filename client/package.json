@@ -12,7 +12,7 @@
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.11.2",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "react-tailwindcss-datepicker": "^1.6.1",
     "web-vitals": "^2.1.4"
   },
