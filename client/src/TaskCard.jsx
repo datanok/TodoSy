@@ -1,4 +1,4 @@
-import { BsCalendar2Minus } from "react-icons/bs";
+import { BsCalendar2Minus, BsFillTrashFill } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
 export default function TaskCard() {
   return (
@@ -23,7 +23,16 @@ export default function TaskCard() {
           <BsCalendar2Minus />
           25 may
         </span>
-        <FiEdit size={18} />
+        <div className="flex flex-row gap-2">
+          <FiEdit
+            size={18}
+            className="hover:text-pink-primary hover:cursor-pointer"
+          />
+          <BsFillTrashFill
+            size={18}
+            className="hover:text-pink-primary hover:cursor-pointer"
+          />
+        </div>
       </div>
     </div>
   );

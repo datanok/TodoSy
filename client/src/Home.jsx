@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-3">
+      <div className="grid grid-cols-1 md:grid-cols-4">
         <div className="">
           <div className="flex flex-row justify-between">
             <h1 className="text-white text-lg mt-4 mx-6 font-bold">
@@ -49,16 +49,26 @@ export default function Home() {
             <TaskCard />
             <TaskCard />
           </div>
-          <button onClick={scrollLeft}>Scroll Left</button>
-          <button onClick={scrollRight}>Scroll Right</button>
         </div>
-        <div className="  border-r-2 border-white">
+        <div className=" 4">
           <h1 className="text-white text-lg mt-4 mx-6 font-bold">
             Today's tasks
           </h1>
           <TaskCard />
+          <TaskCard />
+          <TaskCard />
+          <TaskCard />
         </div>
-        <div className=" border-r-2 border-white"></div>
+        <div className=" ">
+          <TaskCard />
+          <TaskCard />
+          <TaskCard />
+          <TaskCard />
+        </div>
+        <div className="w-full border-l border-[#71417e]">
+          <h1 className="text-white text-lg mt-4 mx-6 font-bold">Calendar</h1>
+          <h3 className="ml-6 mt-6 text-gray-400">15 October</h3>
+        </div>
       </div>
     </>
   );
