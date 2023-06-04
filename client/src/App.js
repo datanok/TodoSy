@@ -3,16 +3,17 @@ import toast, { Toaster } from "react-hot-toast";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import Todo from "./Todo";
 import CreateTodoPopup from "./CreateTodoPopup";
-import Tabs from './Tabs'
+import Tabs from "./Tabs";
 import Home from "./Home";
-import Navbar from './Navbar'
+import Sidebar from "./Sidebar";
 import { Route, Routes } from "react-router-dom";
+import Navbar from "./Navbar";
 
 const API_BASE = "http://localhost:3001";
 
 function App() {
   const [todos, setTodos] = useState([]);
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
   const [newTodo, SetNewTodo] = useState("");
 
   useEffect(() => {
@@ -75,9 +76,9 @@ function App() {
     toast.success("Task Updated!");
   };
 
-  const handleClose =() => {
+  const handleClose = () => {
     setOpen(false);
-  }
+  };
 
   const GetTodos = () => {
     fetch(API_BASE + "/todos")
@@ -91,7 +92,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar/>
+      <Navbar />
       {/* <div>
         <Toaster />
       </div>
@@ -133,8 +134,8 @@ function App() {
           </div>
         </div>
       </div> */}
-        <Routes>
-        <Route path='/home' element={<Home/>}/>
+      <Routes>
+        <Route path="/home" element={<Home />} />
       </Routes>
     </div>
   );

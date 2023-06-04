@@ -1,16 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Cabin&family=IBM+Plex+Sans:wght@500&family=Roboto&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  background: rgb(79, 41, 114);
-  background: linear-gradient(
-    72deg,
-    rgba(79, 41, 114, 1) 0%,
-    rgba(80, 41, 113, 1) 25%,
-    rgba(98, 48, 114, 1) 58%,
-    rgba(99, 48, 114, 1) 99%
-  );
+  background: #111411;
+  font-family: "IBM Plex Sans", sans-serif;
+
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }

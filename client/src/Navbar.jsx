@@ -1,163 +1,66 @@
-import React, { useState } from "react";
-import { Transition } from "@headlessui/react";
-import { ReactComponent as Logo } from "./notepad.svg";
+import React from "react";
+import { AiOutlineMenu } from "react-icons/ai";
 
-function Nav() {
-  const [isOpen, setIsOpen] = useState(false);
+export default function Navbar({ fixed }) {
+  const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
-    <div>
-      <nav className="bg-purple-dark">
-        <div className="max-w-7xl mx-auto sm:px-6">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center">
-              <div className="flex-shrink-0 flex flex-row">
-                {/* <Logo
-                  fill="#ff7179"
-                  style={{ width: "30px", height: "30px" }}
-                /> */}
-                <span className="text-xl font-bold bg-gradient-to-r from-pink-primary to-pink-600 bg-clip-text text-transparent">
-                  TodoSy
-                </span>
-              </div>
-              <div className="hidden md:block">
-                <div className="ml-10 flex items-baseline">
-                  <a
-                    href="/home"
-                    className="text-white p-5 px-7 text-sm font-medium hover:border-t-4 border-pink-primary hover:bg-purple-primary"
-                  >
-                    Dashboards
-                  </a>
-
-                  <a
-                    href="#"
-                    className="text-white p-5 border-t-4 bg-purple-primary text-sm font-medium hover:border-t-4 border-pink-primary hover:bg-purple-primary"
-                  >
-                    Team
-                  </a>
-
-                  <a
-                    href="#"
-                    className="text-white p-5 text-sm font-medium hover:border-t-4 border-pink-primary hover:bg-purple-primary"
-                  >
-                    Projects
-                  </a>
-
-                  <a
-                    href="#"
-                    className="text-white p-5 text-sm font-medium hover:border-t-4 border-pink-primary hover:bg-purple-primary"
-                  >
-                    Calendar
-                  </a>
-
-                  <a
-                    href="#"
-                    className="text-white p-5 text-sm font-medium hover:border-t-4 border-pink-primary hover:bg-purple-primary"
-                  >
-                    Reports
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="-mr-2 flex md:hidden">
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                type="button"
-                className="bg-gray-900 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                aria-controls="mobile-menu"
-                aria-expanded="false"
-              >
-                <span className="sr-only">Open main menu</span>
-                {!isOpen ? (
-                  <svg
-                    className="block h-6 w-6"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M4 6h16M4 12h16M4 18h16"
-                    />
-                  </svg>
-                ) : (
-                  <svg
-                    className="block h-6 w-6"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                )}
-              </button>
-            </div>
+    <>
+      <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-[rgba(35,37,38,255)] mb-3 m-5 rounded-lg">
+        <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
+          <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
+            <a
+              className="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-[#737579]"
+              href="#pablo"
+            >
+              TodoSy
+            </a>
+            <button
+              className="text-[#737579] cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
+              type="button"
+              onClick={() => setNavbarOpen(!navbarOpen)}
+            >
+              <AiOutlineMenu />
+            </button>
+          </div>
+          <div
+            className={
+              "lg:flex flex-grow items-center" +
+              (navbarOpen ? " flex" : " hidden")
+            }
+            id="example-navbar-danger"
+          >
+            <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+              <li className="nav-item">
+                <a
+                  className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-[#737579] hover:opacity-75"
+                  href="#pablo"
+                >
+                  <i className="fab fa-facebook-square text-lg leading-lg text-[#737579] opacity-75"></i>
+                  <span className="ml-2">Share</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-[#737579] hover:opacity-75"
+                  href="#pablo"
+                >
+                  <i className="fab fa-twitter text-lg leading-lg text-[#737579] opacity-75"></i>
+                  <span className="ml-2">Tweet</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-[#737579] hover:opacity-75"
+                  href="#pablo"
+                >
+                  <i className="fab fa-pinterest text-lg leading-lg text-[#737579] opacity-75"></i>
+                  <span className="ml-2">Pin</span>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
-
-        <Transition
-          show={isOpen}
-          enter="transition ease-out duration-100 transform"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="transition ease-in duration-75 transform"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
-        >
-          {(ref) => (
-            <div className="md:hidden" id="mobile-menu">
-              <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a
-                  href="#"
-                  className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Dashboard
-                </a>
-
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Team
-                </a>
-
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Projects
-                </a>
-
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Calendar
-                </a>
-
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Reports
-                </a>
-              </div>
-            </div>
-          )}
-        </Transition>
       </nav>
-    </div>
+    </>
   );
 }
-
-export default Nav;
