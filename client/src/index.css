@@ -4,7 +4,8 @@
 @tailwind utilities;
 
 body {
-  background: #111411;
+  background: rgba(33,35,51,255);
+  
   font-family: "IBM Plex Sans", sans-serif;
 
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */

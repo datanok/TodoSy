@@ -61,10 +61,11 @@ app.put("/todo/edit/:id", async (req, res) => {
   }
 });
 app.post("/todo/new", async (req, res) => {
-  const { text, duedate } = req.body; // Assuming the request body contains both "text" and "duedate" fields
+  const { text, duedate,desc } = req.body; // Assuming the request body contains both "text" and "duedate" fields
 
   const todo = new Todo({
     text: text,
+    desc:desc,
     duedate: duedate,
   });
 
@@ -82,6 +83,16 @@ app.delete("/todo/delete/:id", async (req, res) => {
   const result = await Todo.findByIdAndDelete(req.params.id);
   res.json(result);
 });
+
+app.delete("/todos/delete", async (req, res) => {
+  try {
+    const result = await Todo.deleteMany({});
+    res.json({ message: "All todos have been deleted.", result });
+  } catch (error) {
+    res.status(500).json({ message: "An error occurred while deleting todos.", error });
+  }
+});
+
 
 app.get("/todo/complete/:id", async (req, res) => {
   const todo = await Todo.findById(req.params.id);

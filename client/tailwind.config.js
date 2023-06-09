@@ -12,8 +12,8 @@ module.exports = {
         "purple-dark": "#41106C",
         "purple-primary": "#4E2971",
         "purple-light": "#7E588D",
-        "text-head": "#ffffff",
-        "main-text": "rgba(104,106,107,255)",
+        "primary": "rgba(42,45,63,255)",
+        "main-text": "rgba(179,180,180,255)",
       },
       fontFamily: {
         cabin: ["Cabin", "sans-serif"],
