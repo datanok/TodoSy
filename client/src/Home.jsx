@@ -70,14 +70,14 @@ export default function Home() {
     toast.success("Task Marked as Completed!");
   };
 
-  const editTodo = async (id, newText) => {
-    console.log(id, newText);
+  const editTodo = async (id, newTitle, newDesc) => {
+    console.log(id, newTitle);
     const data = await fetch(API_BASE + "/todo/edit/" + id, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ text: newText }),
+      body: JSON.stringify({ text: newTitle, desc: newDesc }),
     }).then((res) => res.json());
 
     setTodos((todos) =>
@@ -117,6 +117,7 @@ export default function Home() {
 
   return (
     <>
+      <Toaster />
       <div className="grid grid-cols-1 md:grid-cols-4 mx-10">
         <div className="">
           <div className="flex flex-row justify-between">
@@ -142,6 +143,8 @@ export default function Home() {
                 deleteTodo={deleteTodo}
                 editTodo={editTodo}
                 setOpen={setOpen}
+                setTodos={setTodos}
+                GetTodos={GetTodos}
               />
             ))}
           </div>
@@ -157,11 +160,13 @@ export default function Home() {
           >
             {todos.map((todo) => (
               <TaskCard
+                setTodos={setTodos}
                 todo={todo}
                 key={todo._id}
                 completeTodo={completeTodo}
                 deleteTodo={deleteTodo}
                 editTodo={editTodo}
+                GetTodos={GetTodos}
               />
             ))}
           </div>
@@ -182,6 +187,8 @@ export default function Home() {
                 completeTodo={completeTodo}
                 deleteTodo={deleteTodo}
                 editTodo={editTodo}
+                setTodos={setTodos}
+                GetTodos={GetTodos}
               />
             ))}
           </div>

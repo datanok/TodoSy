@@ -3,20 +3,30 @@ import { FiEdit } from "react-icons/fi";
 import EditTask from "./EditTask";
 import { useState, useRef } from "react";
 
-export default function TaskCard({ todo, completeTodo, deleteTodo, editTodo }) {
+export default function TaskCard({
+  setTodos,
+  todo,
+  completeTodo,
+  deleteTodo,
+  editTodo,
+  GetTodos,
+}) {
   const [open, setOpen] = useState(false);
 
   const cancelButtonRef = useRef(null);
 
-  console.log(todo);
   return (
     <>
       <EditTask
         setOpen={setOpen}
         cancelButtonRef={cancelButtonRef}
         open={open}
+        todo={todo}
+        editTodo={editTodo}
+        setTodos={setTodos}
+        GetTodos={GetTodos}
       />
-      <div className="bg-primary shadow-[4.0px_8.0px_8.0px_rgba(64, 19, 102,0.88)] gap-2 min-w-fit p-5 m-3 flex flex-col  rounded-lg border-1 border-gray-400">
+      <div className="bg-primary shadow-[4.0px_8.0px_8.0px_rgba(64, 19, 102,0.88)] gap-2 min-w-[304px] p-5 m-3 flex flex-col  rounded-lg border-1 border-gray-400">
         <h1 className="text-white text-md font-bold">{todo.text}</h1>
 
         <h6 className="text-gray-400 text-sm">{todo.desc}</h6>

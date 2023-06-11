@@ -18,10 +18,10 @@ mongoose
 
 const Todo = require("./models/Todo");
 Todo.find({})
-  .then(todos => {
+  .then((todos) => {
     console.log(todos);
   })
-  .catch(err => {
+  .catch((err) => {
     console.error(err);
   });
 app.get("/todos", async (req, res) => {
@@ -36,20 +36,24 @@ app.get("/todays-todos", async (req, res) => {
   const todos = await Todo.find({
     dueDate: {
       $gte: today,
-      $lt: new Date(today.getTime() + 24 * 60 * 60 * 1000) // Add one day to today's date
-    }
+      $lt: new Date(today.getTime() + 24 * 60 * 60 * 1000), // Add one day to today's date
+    },
   }); // Find todos where dueDate is between today and tomorrow
-  console.log('todays')
-  console.log(todos)
+  console.log("todays");
+  console.log(todos);
   res.json(todos);
 });
-
 
 app.put("/todo/edit/:id", async (req, res) => {
   try {
     const todo = await Todo.findByIdAndUpdate(
       req.params.id,
-      { text: req.body.text },
+      {
+        text: req.body.text,
+        desc: req.body.desc,
+        tags: req.body.tags,
+        duedate: req.body.duedate,
+      },
       {
         new: true,
       }
@@ -61,11 +65,11 @@ app.put("/todo/edit/:id", async (req, res) => {
   }
 });
 app.post("/todo/new", async (req, res) => {
-  const { text, duedate,desc } = req.body; // Assuming the request body contains both "text" and "duedate" fields
+  const { text, duedate, desc } = req.body; // Assuming the request body contains both "text" and "duedate" fields
 
   const todo = new Todo({
     text: text,
-    desc:desc,
+    desc: desc,
     duedate: duedate,
   });
 
@@ -78,7 +82,6 @@ app.post("/todo/new", async (req, res) => {
   }
 });
 
-
 app.delete("/todo/delete/:id", async (req, res) => {
   const result = await Todo.findByIdAndDelete(req.params.id);
   res.json(result);
@@ -89,10 +92,11 @@ app.delete("/todos/delete", async (req, res) => {
     const result = await Todo.deleteMany({});
     res.json({ message: "All todos have been deleted.", result });
   } catch (error) {
-    res.status(500).json({ message: "An error occurred while deleting todos.", error });
+    res
+      .status(500)
+      .json({ message: "An error occurred while deleting todos.", error });
   }
 });
-
 
 app.get("/todo/complete/:id", async (req, res) => {
   const todo = await Todo.findById(req.params.id);

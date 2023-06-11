@@ -12,7 +12,9 @@ module.exports = {
         "purple-dark": "#41106C",
         "purple-primary": "#4E2971",
         "purple-light": "#7E588D",
-        "primary": "rgba(42,45,63,255)",
+        cyanprimary: "#bdf4fc",
+        primary: "rgba(42,45,63,255)",
+        background: "rgba(33,35,51,255)",
         "main-text": "rgba(179,180,180,255)",
       },
       fontFamily: {

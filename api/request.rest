@@ -22,5 +22,7 @@ PUT http://localhost:3001/todo/edit/6446c1428b7afd4569ed56b5
 Content-Type: application/json
 
 {
-    "text": "updated again"
+    "text": "new title",
+    "desc": "workinggggg????",
+    "tags": [{"tagName":"Worki", "color":"white"}]
 }

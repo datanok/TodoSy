@@ -22,6 +22,9 @@ export default function sidebar() {
             <div className="py-4  px-8 ">
               <span className=" text-sm uppercase text-main-text  ">Today</span>
             </div>
+            <div className="py-4  px-8 ">
+              <span className=" text-sm uppercase text-main-text  ">Today</span>
+            </div>
           </div>
         </div>
       </aside>
