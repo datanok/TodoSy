@@ -29,7 +29,8 @@ const TodoSchema = new Schema({
   },
   dueDate: {
     type: Date,
-    default: Date.now(),
+    default:Date.now
+
   },
 });
 

@@ -4,42 +4,29 @@ import Datepicker from "react-tailwindcss-datepicker";
 import TagsField from "./TagsField";
 import toast, { Toaster } from "react-hot-toast";
 
-export default function EditTask({
+export default function CreateTask({
   cancelButtonRef,
-  setOpen,
-  open,
-  todo,
+  setshowPopup,
+  showPopup,
+  todos,
   setTodos,
   GetTodos,
 }) {
   const API_BASE = "http://localhost:3001";
-  const [newDesc, setNewDesc] = useState(todo.desc);
-  const [newTitle, setNewTitle] = useState(todo.text);
+  const [newDesc, setNewDesc] = useState("");
+  const [newTitle, setNewTitle] = useState("");
 
   const [selectedColor, setSelectedColor] = useState("");
   const [tags, setTags] = useState([]);
-  useEffect(() => {
-    if (todo.tags) {
-      setTags(todo.tags);
-    }
-  }, [todo.tags]);
+
   const [tag, setTag] = useState("");
 
   const [value, setValue] = useState({
-    startDate: new Date(todo.dueDate),
-    endDate: new Date(todo.dueDate),
+    startDate: null,
+    endDate: null,
   });
   let date = new Date();
   date.setDate(date.getDate() - 1);
-
-  useEffect(() => {
-    const currentDate = new Date();
-
-    setValue((prevValue) => ({
-      ...prevValue,
-      startDate: new Date(todo.dueDate),
-    }));
-  }, []);
 
   const isoDate = value.startDate
     ? new Date(value.startDate).toISOString()
@@ -49,55 +36,52 @@ export default function EditTask({
     // console.log("newValue:", newValue);
     setValue(newValue);
   };
-  const editTodo = async (id, newTitle, isoDate, newTags, newDesc) => {
-    console.log("here");
-    const duedate = new Date(value.startDate).toISOString();
-    const data = await fetch(API_BASE + "/todo/edit/" + id, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        text: newTitle,
-        dueDate: duedate,
-        tags: newTags,
-        desc: newDesc,
-      }),
-    }).then((res) => {
-      return res.json();
-    });
-
-    // Log the data object to inspect its structure
-
-    setTodos((todos) =>
-      todos.map((todo) => {
-        console.log(todo._id, data._id);
-        if (todo._id === data._id) {
-          todo.title = data.title; // Check if the data structure is correct here
-          todo.duedate = data.duedate;
-          todo.tags = data.tags;
-          todo.desc = data.desc;
-        }
-        return todo;
-      })
-    );
-    GetTodos();
-    toast.success("Task Updated!");
-  };
 
   const handleSubmitbtnClick = () => {
-    editTodo(todo._id, newTitle, value, tags, newDesc);
+    console.log(tags);
+    if (tags && tags.length > 0) {
+      addTodo(newTitle, value, tags, newDesc);
+      setTags([]);
+    } else {
+      toast.error("Please add at least one tag");
+    }
     setTags([]);
-    setOpen(false);
+    setshowPopup(false);
+  };
+
+  const addTodo = async (newTodo, duedate, tags, newDesc) => {
+    console.log("working");
+    console.log(duedate, typeof duedate);
+
+    // Convert duedate to a valid Date object
+    const parsedDueDate = new Date(duedate.startDate);
+    console.log(parsedDueDate, typeof parsedDueDate);
+
+    const data = await fetch(API_BASE + "/todo/new", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        text: newTodo,
+        duedate: parsedDueDate.toISOString(), // Convert to ISO string format
+        tags: tags,
+        desc: newDesc,
+      }),
+    }).then((res) => res.json());
+
+    console.log(data);
+    setTodos([...todos, data]);
+    toast.success("Task Added!");
   };
 
   return (
-    <Transition.Root show={open} as={Fragment}>
+    <Transition.Root show={showPopup} as={Fragment}>
       <Dialog
         as="div"
         className="relative z-10"
         initialFocus={cancelButtonRef}
-        onClose={setOpen}
+        onClose={setshowPopup}
       >
         <Transition.Child
           as={Fragment}
@@ -130,7 +114,7 @@ export default function EditTask({
                         as="h3"
                         className="text-lg mt-3 font-bold leading-6 text-white"
                       >
-                        Edit Task
+                        Add Task
                       </Dialog.Title>
 
                       <div className="mt-4 md:w-[470px]">
@@ -148,7 +132,7 @@ export default function EditTask({
                               setNewTitle(Event.target.value)
                             }
                             autoComplete="text"
-                            defaultValue={todo.text}
+                            placeholder="Enter Title"
                             className="block flex-1 border-0 bg-transparent p-2 text-[#9892ab] placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                           />
                         </div>
@@ -185,8 +169,6 @@ export default function EditTask({
                               onChange={(Event) =>
                                 setNewDesc(Event.target.value)
                               }
-                              autoComplete="desc"
-                              defaultValue={todo.desc}
                               className="block flex-1 border-0 bg-transparent p-2 text-[#9892ab] placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                               placeholder="Enter Description"
                             />
@@ -217,7 +199,7 @@ export default function EditTask({
                   <button
                     type="button"
                     className="mt-3 inline-flex w-full justify-center rounded-md bg-[#9892ab] px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                    onClick={() => setOpen(false)}
+                    onClick={() => setshowPopup(false)}
                     ref={cancelButtonRef}
                   >
                     Cancel

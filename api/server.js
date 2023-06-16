@@ -38,21 +38,24 @@ app.get("/todays-todos", async (req, res) => {
       $gte: today,
       $lt: new Date(today.getTime() + 24 * 60 * 60 * 1000), // Add one day to today's date
     },
+    complete:false
   }); // Find todos where dueDate is between today and tomorrow
   console.log("todays");
   console.log(todos);
   res.json(todos);
 });
-
+//Edit Todo
 app.put("/todo/edit/:id", async (req, res) => {
   try {
+    const dueDate = new Date(req.body.dueDate)
+
     const todo = await Todo.findByIdAndUpdate(
       req.params.id,
       {
         text: req.body.text,
         desc: req.body.desc,
         tags: req.body.tags,
-        duedate: req.body.duedate,
+        dueDate: dueDate,
       },
       {
         new: true,
@@ -64,13 +67,18 @@ app.put("/todo/edit/:id", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
-app.post("/todo/new", async (req, res) => {
-  const { text, duedate, desc } = req.body; // Assuming the request body contains both "text" and "duedate" fields
 
+//Add Todo
+app.post("/todo/new", async (req, res) => {
+  const { text, duedate, desc, tags } = req.body;
+
+  const parsedDuedate = new Date(duedate);
+  
   const todo = new Todo({
     text: text,
     desc: desc,
-    duedate: duedate,
+    tags:tags,
+    dueDate: new Date(parsedDuedate),
   });
 
   try {
@@ -81,6 +89,7 @@ app.post("/todo/new", async (req, res) => {
     res.status(500).json({ error: "Failed to save todo" });
   }
 });
+
 
 app.delete("/todo/delete/:id", async (req, res) => {
   const result = await Todo.findByIdAndDelete(req.params.id);

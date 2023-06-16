@@ -18,13 +18,13 @@ export default function TagsField({
   ];
 
   const addTag = (color, tagName) => {
-    const newTag = { name: tagName, color: color };
+    const newTag = { tagName: tagName, color: color };
     setTags((prevTags) => [...prevTags, newTag]);
     setTag("");
   };
 
   const removeTag = (tagName) => {
-    setTags((prevTags) => prevTags.filter((tag) => tag.name !== tagName));
+    setTags((prevTags) => prevTags.filter((tag) => tag.tagName !== tagName));
   };
 
   const handleColorSelection = (color) => {
@@ -94,10 +94,14 @@ export default function TagsField({
           {tags.map((tag) => (
             <span
               style={{ backgroundColor: tag.color }}
-              onClick={() => removeTag(tag.name)}
+              onClick={() => removeTag(tag.tagName)}
               className="text-xs text-black hover:font-extrabold  p-1 px-2 rounded-md flex gap-2 align-baseline hover:bg-[#CAE7EB] hover:text-black"
             >
-              {tag.name} <RxCross2 className="mt-0.5 hover:cursor-pointer" />
+              {tag.tagName}{" "}
+              <RxCross2
+                className="mt-0.5 hover:cursor-pointer"
+                onClick={() => removeTag()}
+              />
             </span>
           ))}
         </div>

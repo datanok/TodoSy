@@ -1,4 +1,6 @@
 GET http://localhost:3001/todos
+###
+GET http://localhost:3001/todays-todos
 
 
 ###
@@ -6,10 +8,24 @@ POST  http://localhost:3001/todo/new
 Content-Type: application/json
 
 {
-    "text" : "third task",
-    "desc": "Some informatin about this, this task is very imp"
-
+  "text": "secondasdasd Task",
+  "desc": "Some description",
+  "tags": [
+    {
+      "tagName": "Work",
+      "color": "white"
+    }
+  ],
+  "duedate": "2023-07-23T00:00:00.000Z"
 }
+
+# {
+#     "text" : "whatsas task task",
+#      "tags": [{"tagName":"Worki", "color":"white"}],
+#      "duedate":"2023-06-23T00:00:00.000Z",
+#     "desc": "Some informatin about this, this task is very imp"
+
+# }
 
 ###
 DELETE  http://localhost:3001/todo/delete/645201fc5e2a46aa1c71b369
@@ -18,11 +34,12 @@ DELETE  http://localhost:3001/todo/delete/645201fc5e2a46aa1c71b369
 DELETE  http://localhost:3001/todos/delete
 
 ###
-PUT http://localhost:3001/todo/edit/6446c1428b7afd4569ed56b5
+PUT http://localhost:3001/todo/edit/647da4fccdf0262a3ac5af9b
 Content-Type: application/json
 
 {
     "text": "new title",
     "desc": "workinggggg????",
     "tags": [{"tagName":"Worki", "color":"white"}]
+    
 }
